@@ -1,17 +1,20 @@
 help:	## Show this help.
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
+all: install build start
+.DEFAULT_GOAL := all
 
 
-build: 	## install npm and transpile typescript to the /dist folder
+install:  ## install dependencies
 	npm ci
-	tsc
 
+
+build: 	## transpile typescript to the /dist folder
+	tsc
 
 
 watch: 	## watch for code changes and transpile as we go
 	tsc --watch
-
 
 
 start: 	## run the server
